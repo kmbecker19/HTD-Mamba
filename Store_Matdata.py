@@ -7,7 +7,6 @@ import argparse
 import json
 import pickle
 from PIL import Image, ImageDraw
-import pprint
 
 IMG_SIZE = (320, 247)
 
@@ -58,7 +57,7 @@ if __name__ == '__main__':
         'map_file': 'map.json',
         'output_file': 'output.mat',
         'bands': 200,
-        'target': 'PVC',
+        'target': 'PVC'
     }
     for key in arguments.keys():
         parser.add_argument(f'--{key}', f'-{key[0]}', 
@@ -66,7 +65,6 @@ if __name__ == '__main__':
                             default=arguments[key],
                             help=f'Set {key} to value. (default: {arguments[key]})')
     
-    parser.add_argument('--verbose', '-v', action='store_true', help="Print the contents of the .mat file")
     args = parser.parse_args()
     
     # Load the HSI data
@@ -78,6 +76,4 @@ if __name__ == '__main__':
     # Save the results to a .mat file
     print(f"Saving data to file '{args.output_file}'...")
     sio.savemat(args.output_file, mat_data, do_compression=True)
-    if args.verbose:
-        pprint.pp(mat_data)
     print(f"Data saved to '{args.output_file}'")
