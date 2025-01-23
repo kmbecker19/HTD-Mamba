@@ -1,5 +1,26 @@
 import numpy as np
 import os
+from functools import wraps
+import time
+
+def time_func(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start_time = time.perf_counter()
+        result = func(*args, **kwargs)
+        end_time = time.perf_counter()
+        print(f'{func.__name__} executed in {end_time - start_time} seconds')
+        return result
+    return wrapper
+
+def file_must_exist(func):
+    @wraps(func)
+    def wrapper(filename, *args, **kwargs):
+        if not os.path.exists(filename):
+            raise FileNotFoundError(f'The file {filename} does not exist.')
+        return func(filename, *args, **kwargs)
+    return wrapper
+    
 def standard(X):
     '''
     Standardization
