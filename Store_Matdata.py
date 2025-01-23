@@ -17,7 +17,7 @@ IMG_SIZE = (320, 247)
 
 
 @load_from_hsi
-def store_image(image, bands=200, mat_dict=None):
+def store_image(image, bands=200, mat_dict=None) -> dict:
     '''
     Take an image from a .hdr file and store it in a dictionary following .mat
     file format.
@@ -36,7 +36,7 @@ def store_image(image, bands=200, mat_dict=None):
     return result
 
 
-def store_map_from_json(map_path, target='PVC', mat_dict=None):
+def store_map_from_json(map_path, target='PVC', mat_dict=None) -> dict:
     '''
     Load a segmentation from a JSON file and store it in a dictionary following .mat
     file format.
@@ -52,6 +52,7 @@ def store_map_from_json(map_path, target='PVC', mat_dict=None):
         map_data = json.load(f)
 
     # Create binary segmentation map from the polygon points given in the JSON file
+    # TODO: Potentially edit this code to work for multiple target instances
     for object in map_data['objects']:
         if object['category'] == target:
             polygon = [(round(x), round(y)) for [x, y] in object['segmentation']]
