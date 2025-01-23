@@ -5,7 +5,7 @@ A script for generating MATLAB-5 style .mat files from .hdr HSI files and JSON p
 '''
 import os
 from pathlib import Path
-from Utils import time_func, file_must_exist
+from Utils import time_func, file_must_exist, load_from_hsi
 import scipy.io as sio
 import numpy as np
 import argparse
@@ -65,21 +65,22 @@ def store_map_from_json(map_path, target='PVC', mat_dict=None) -> dict:
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        description='A program for generating .mat file data with HSI images and JSON segmentation maps.'
+        description='A program for generating MATLAB-5 style .mat files from .hdr HSI files and JSON polgyon segmentation maps.'
     )
 
     # Define the command line arguments
     arguments = {
-        'data_dir': 'data/',
         'map_file': 'map.json',
         'output_file': 'output.mat',
         'bands': 200,
         'target': 'PVC'
     }
+    parser.add_argument('data_dir', type=str, help='The path to the HSI data to store as a MATLAB file.')
     for key in arguments.keys():
-        parser.add_argument(f'--{key}', f'-{key[0]}', 
+        parser.add_argument(f'-{key[0]}', f'--{key}',
                             type=type(arguments[key]), 
                             default=arguments[key],
+                            metavar='',
                             help=f'Set {key} to value. (default: {arguments[key]})')
     
     args = parser.parse_args()
