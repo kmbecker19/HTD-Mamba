@@ -1,3 +1,8 @@
+'''
+Store_Matdata.py
+
+A script for generating MATLAB-5 style .mat files from .hdr HSI files and JSON polgyon segmentation maps.
+'''
 import os
 from pathlib import Path
 from Utils import time_func, file_must_exist
@@ -13,6 +18,10 @@ IMG_SIZE = (320, 247)
 
 @load_from_hsi
 def store_image(image, bands=200, mat_dict=None):
+    '''
+    Take an image from a .hdr file and store it in a dictionary following .mat
+    file format.
+    '''
     if mat_dict is not None:
         result = mat_dict
     else:
@@ -28,6 +37,10 @@ def store_image(image, bands=200, mat_dict=None):
 
 
 def store_map_from_json(map_path, target='PVC', mat_dict=None):
+    '''
+    Load a segmentation from a JSON file and store it in a dictionary following .mat
+    file format.
+    '''
     if mat_dict is not None:
         result = mat_dict
     else:
@@ -38,6 +51,7 @@ def store_map_from_json(map_path, target='PVC', mat_dict=None):
     with open(map_path, 'r') as f:
         map_data = json.load(f)
 
+    # Create binary segmentation map from the polygon points given in the JSON file
     for object in map_data['objects']:
         if object['category'] == target:
             polygon = [(round(x), round(y)) for [x, y] in object['segmentation']]
@@ -49,7 +63,9 @@ def store_map_from_json(map_path, target='PVC', mat_dict=None):
             
     
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description='A program for generating .mat file data with HSI images and JSON segmentation maps.'
+    )
 
     # Define the command line arguments
     arguments = {
