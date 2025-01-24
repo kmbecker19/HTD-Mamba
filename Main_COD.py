@@ -17,9 +17,9 @@ os.environ['CUDA_LAUNCH_BLOCKING'] = '0'
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 modelConfig = {
-        "state": "train",  # train or select_best, eval
+        "state": "select_best",  # train or select_best, eval
         "epoch": 200,
-        "band": 189,
+        "band": 201,
         "batch_size": 80,
         "seed": 1,
         "channel": 16,
@@ -36,8 +36,8 @@ modelConfig = {
         "state_size":16,
         "layer": 1,
         "delta": 0.1,
-        "dataset": "Sandiego",
-        "path": "datasets/Sandiego.mat"
+        "dataset": "Subj_015",
+        "path": "datasets/subj_015.mat"
 }
 
 
@@ -54,7 +54,9 @@ def main(model_config: dict):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(prog="Main_COD.py")
+    parser = argparse.ArgumentParser(
+        description="A script for easily editing the training and evaluation parameters for HTD-Mamba."
+    )
 
     # Add command line arguments for each parameter in modelConfig
     for key in modelConfig.keys():
