@@ -154,6 +154,7 @@ def eval(modelConfig: Dict):
         print('{:.{precision}f}'.format(auc5, precision=modelConfig['epision']))
 
         plt.figure(1)
+        plt.figure(1)
         plt.imshow(detection_map)
 
         plt.figure(2)
@@ -162,7 +163,7 @@ def eval(modelConfig: Dict):
         plt.legend(loc='lower right')
         plt.plot([0, 1], [0, 1], 'r--')
         plt.xlim([0, 1])
-        plt.ylim([0, 1])
+        plt.ylim([0, 1.1])
         plt.xlabel('False Positive Rate')
         plt.ylabel('True Positive Rate')
 
