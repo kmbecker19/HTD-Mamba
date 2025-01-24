@@ -153,7 +153,19 @@ def eval(modelConfig: Dict):
         print('{:.{precision}f}'.format(auc4, precision=modelConfig['epision']))
         print('{:.{precision}f}'.format(auc5, precision=modelConfig['epision']))
 
+        plt.figure(1)
         plt.imshow(detection_map)
+
+        plt.figure(2)
+        plt.title('Receiver Operating Characteristic')
+        plt.plot(fpr, tpr, 'b', label=f'AUC = {auc1:.2f}')
+        plt.legend(loc='lower right')
+        plt.plot([0, 1], [0, 1], 'r--')
+        plt.xlim([0, 1])
+        plt.ylim([0, 1])
+        plt.xlabel('False Positive Rate')
+        plt.ylabel('True Positive Rate')
+
         plt.show()
 
 
