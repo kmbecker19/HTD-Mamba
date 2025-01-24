@@ -26,7 +26,7 @@ import pprint
 modelConfig = {
         "state": "eval",  # train or select_best, eval
         "epoch": 200,
-        "band": 189,
+        "band": 201,
         "batch_size": 80,
         "seed": 1,
         "channel": 16,
@@ -43,10 +43,10 @@ modelConfig = {
         "state_size":16,
         "layer": 1,
         "delta": 0.1,
-        "dataset": "Sandiego",
-        "data_path": "datasets/Sandiego.mat",
+        "dataset": "Subj_015",
+        "data_path": "datasets/subj_015.mat",
         "target_path": None,
-        "ts_type": 7
+        "ts_type": 8
 }
 
 
