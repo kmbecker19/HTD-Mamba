@@ -73,7 +73,6 @@ if __name__ == '__main__':
         'map_file': 'map.json',
         'output_file': 'output.mat',
         'bands': 200,
-        'target': 'PVC'
     }
     parser.add_argument('data_dir', type=str, help='The path to the HSI data to store as a MATLAB file.')
     for key in arguments.keys():
@@ -82,6 +81,9 @@ if __name__ == '__main__':
                             default=arguments[key],
                             metavar='',
                             help=f'Set {key} to value. (default: {arguments[key]})')
+
+    parser.add_argument('-t', '--target', type=str, choices=['PVC', 'Metal', 'Vest'], metavar='', default='PVC',
+                        help='Set the target category for segmentation. (choices: PVC, Metal, Vest)')
     
     args = parser.parse_args()
     
