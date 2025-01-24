@@ -62,7 +62,7 @@ if __name__ == '__main__':
     for key in modelConfig.keys():
         parser.add_argument(f'--{key}', type=type(modelConfig[key]), 
                             default=modelConfig[key], 
-                            help=f"Parameter <{key.upper()}> for model. Default: {modelConfig[key]}")
+                            help=f"Parameter <{key.upper()}> for model (Default: {modelConfig[key]})")
 
     args = parser.parse_args()
     modelConfig.update(vars(args))
