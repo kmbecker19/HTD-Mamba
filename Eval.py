@@ -154,6 +154,7 @@ def eval(modelConfig: Dict):
         print('{:.{precision}f}'.format(auc5, precision=modelConfig['epision']))
 
         plt.figure(1)
+        plt.figure(1)
         plt.imshow(detection_map)
 
         plt.figure(2)
